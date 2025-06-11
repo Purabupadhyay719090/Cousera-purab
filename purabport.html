@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purab Upadhyay | Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #f5f6fa;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #00ffea;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f5f6fa;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover,
+    .available-btn:hover {
+      color: #00ffea;
+    }
+
+    .available-btn {
+      padding: 0.5rem 1rem;
+      background: #00ffea;
+      color: #000;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+
+    .available-btn:hover {
+      background: #00e0c0;
+      transform: scale(1.05);
+    }
+
+    .header-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(0, 255, 234, 0.6);
+    }
+
+    .text-content h1 {
+      font-size: 3.5rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .highlight {
+      color: #00ffea;
+    }
+
+    .typewriter {
+      font-size: 1.4rem;
+      color: #f1c40f;
+      margin-top: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid;
+      animation: typing 5s steps(100, end) infinite, blink 5s infinite;
+      width: 0;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      50% { width: 260px; }
+      100% { width: 0; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: #00ffea;
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #00e0c0;
+    }
+
+    .social-icons {
+      margin-top: 2rem;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: #fff;
+      background-color: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 50%;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: #00ffea;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    .contact-details {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #dfe6e9;
+    }
+
+    .skills-section,
+    .languages-section {
+      padding: 4rem 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .skills-section h2,
+    .languages-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #00ffea;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .skill-item {
+      background-color: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      font-weight: 500;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(0,255,234,0.2);
+    }
+
+    .language-list {
+      font-size: 1.2rem;
+      color: #f5f6fa;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .text-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .typewriter {
+        font-size: 1.1rem;
+      }
+
+      .avatar {
+        width: 200px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Purab.Portpolia</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#languages">Languages</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <a class="available-btn" 
+           href="https://wa.me/916376926756?text=Hi%20Purab%2C%20I%27m%20interested%20in%20working%20with%20you." 
+           target="_blank">
+          Available for Work
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="header-section" id="about">
+    <div class="avatar">
+      <img src="Screenshot_2025-06-06_132223-removebg-preview.png" alt="Purab" />
+    </div>
+    <div class="text-content">
+      <h1>Hi There, I'm <span class="highlight">Purab</span></h1>
+      <div class="typewriter">Frontend Developer | Web Developer</div>
+      <a href="#skills" class="btn">See My Skills ↓</a>
+
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/purab-upadhyay-9aaa22339/" target="_blank">in</a>
+        <a href="https://github.com/Purabupadhyay719090/Cousera-purab" target="_blank">🐱</a>
+       
+        
+        
+      </div>
+
+      <div class="contact-details" id="contact">
+        <p>📞 +91-6376926756</p>
+        <p>📧 purabupadhyay06@gmail.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section" id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-item">HTML</div>
+      <div class="skill-item">CSS</div>
+      <div class="skill-item">JavaScript</div>
+      <div class="skill-item">React</div>
+      <div class="skill-item">Mysql</div>
+      <div class="skill-item">Web Developer</div>
+      <div class="skill-item">Figma</div>
+      <div class="skill-item">Git/GitHub</div>
+      <div class="skill-item">Bootstrap</div>
+      <div class="skill-item">Ms Office</div>
+      <div class="skill-item">Ui/Ux design</div>
+      <div class="skill-item">Responsive web page</div>
+    </div>
+  </section>
+
+  <!-- Languages Section -->
+  <section class="languages-section" id="languages">
+    <h2>Languages Known</h2>
+    <div class="language-list">
+      <p>Hindi</p>
+      <p>English</p>
+    </div>
+  </section>
+
+</body>
+</html>
