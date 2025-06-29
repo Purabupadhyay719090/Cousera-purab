@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Gallery</title>
+    <style>
+        
+body{
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(to bottom, lightgreen, lightblue);
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    width: 90%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    font-weight: 400;
+}
+
+.input{
+    padding: 20px 10px;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+
+.errorMessage{
+    color: red;
+    font-weight: 600;
+    margin: 10px;
+    display: none;
+}
+
+.btn{
+    text-transform: uppercase;
+    width: 250px;
+    height: 45px;
+    margin: 20px 0;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: black;
+    color: aliceblue;
+
+}
+
+.btn:hover{
+    color: aliceblue;
+    background-color: green;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out;
+}
+.gallery img{
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.gallery{
+    display: none;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Photo Gallery</h1>
+      <h2>Enter the number of photos</h2>
+      <input
+        type="number"
+        id="input"
+        class="input"
+        value="2"
+        min="1"
+        max="10"
+      />
+      <small class="errorMessage" id="errorMessage">Error Message</small>
+      <button class="btn" id="btn">Get Photos</button>
+      <div class="gallery" id="gallery">
+        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
+        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
+        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
+        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
+      </div>
+    </div>
+    <script>const btnEl = document.getElementById("btn");
+const errorMessageEl = document.getElementById("errorMessage");
+const galleryEl = document.getElementById("gallery");
+
+async function fetchImage() {
+  const inputValue = document.getElementById("input").value;
+
+  if (inputValue > 10 || inputValue < 1) {
+    errorMessageEl.style.display = "block";
+    errorMessageEl.innerText = "Number should be between 0 and 11";
+    return;
+  }
+
+  imgs = "";
+
+  try {
+    btnEl.style.display = "none";
+    const loading = `<img src="spinner.svg" />`;
+    galleryEl.innerHTML = loading;
+    await fetch(
+      `https://api.unsplash.com/photos?per_page=${inputValue}&page=${Math.round(
+        Math.random() * 1000
+      )}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`
+    ).then((res) =>
+      res.json().then((data) => {
+        if (data) {
+          data.forEach((pic) => {
+            imgs += `
+            <img src=${pic.urls.small} alt="image"/>
+            `;
+            galleryEl.style.display = "block";
+            galleryEl.innerHTML = imgs;
+            btnEl.style.display = "block";
+            errorMessageEl.style.display = "none";
+          });
+        }
+      })
+    );
+  } catch (error) {
+    console.log(error);
+    errorMessageEl.style.display = "block";
+    errorMessageEl.innerHTML = "An error happened, try again later";
+    btnEl.style.display = "block";
+    galleryEl.style.display = "none";
+  }
+}
+
+btnEl.addEventListener("click", fetchImage);</script>
+  </body>
+</html>
