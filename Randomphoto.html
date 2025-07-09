@@ -1,156 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photo Gallery</title>
-    <style>
-        
-body{
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(to bottom, lightgreen, lightblue);
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.container{
-    background-color: aliceblue;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    width: 90%;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-h2{
-    font-weight: 400;
-}
+    .container {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
 
-.input{
-    padding: 20px 10px;
-    font-size: 18px;
-    background-color: white;
-    border-radius: 5px;
-    text-align: center;
-    width: 100px;
-}
+    h1.typing {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #333;
+      width: 0;
+      animation: typing 2.5s steps(20, end) forwards, blink 0.75s infinite;
+    }
 
-.errorMessage{
-    color: red;
-    font-weight: 600;
-    margin: 10px;
-    display: none;
-}
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
 
-.btn{
-    text-transform: uppercase;
-    width: 250px;
-    height: 45px;
-    margin: 20px 0;
-    font-size: 18px;
-    border-radius: 5px;
-    background-color: black;
-    color: aliceblue;
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
 
-}
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
 
-.btn:hover{
-    color: aliceblue;
-    background-color: green;
-    cursor: pointer;
-    transition: background-color 300ms ease-in-out;
-}
-.gallery img{
-    width: 400px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin: 5px;
-}
+    .input, .search {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-.gallery{
-    display: none;
-}
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Photo Gallery</h1>
-      <h2>Enter the number of photos</h2>
-      <input
-        type="number"
-        id="input"
-        class="input"
-        value="2"
-        min="1"
-        max="10"
-      />
-      <small class="errorMessage" id="errorMessage">Error Message</small>
-      <button class="btn" id="btn">Get Photos</button>
-      <div class="gallery" id="gallery">
-        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
-        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
-        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
-        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image">
-      </div>
+    .input {
+      width: 80px;
+    }
+
+    .search {
+      width: 200px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #019875;
+    }
+
+    .errorMessage {
+      color: red;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .gallery img {
+      width: 220px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ddd;
+      border-top: 4px solid #00b894;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search, .input {
+        width: 100%;
+        max-width: 250px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="typing">Photo Gallery</h1>
+    <div class="controls">
+      <input type="text" id="search" class="search" placeholder="Search images (e.g., cats)" />
+      <input type="number" id="input" class="input" value="3" min="1" max="10" />
+      <button class="btn" id="btn">Search</button>
     </div>
-    <script>const btnEl = document.getElementById("btn");
-const errorMessageEl = document.getElementById("errorMessage");
-const galleryEl = document.getElementById("gallery");
+    <div class="errorMessage" id="errorMessage"></div>
+    <div id="gallery" class="gallery"></div>
+  </div>
 
-async function fetchImage() {
-  const inputValue = document.getElementById("input").value;
+  <script>
+    const btnEl = document.getElementById("btn");
+    const searchInput = document.getElementById("search");
+    const countInput = document.getElementById("input");
+    const errorMessageEl = document.getElementById("errorMessage");
+    const galleryEl = document.getElementById("gallery");
 
-  if (inputValue > 10 || inputValue < 1) {
-    errorMessageEl.style.display = "block";
-    errorMessageEl.innerText = "Number should be between 0 and 11";
-    return;
-  }
+    async function fetchImages() {
+      const query = searchInput.value.trim();
+      const count = parseInt(countInput.value);
 
-  imgs = "";
+      galleryEl.style.opacity = 0;
+      galleryEl.innerHTML = "";
+      errorMessageEl.innerText = "";
 
-  try {
-    btnEl.style.display = "none";
-    const loading = `<img src="spinner.svg" />`;
-    galleryEl.innerHTML = loading;
-    await fetch(
-      `https://api.unsplash.com/photos?per_page=${inputValue}&page=${Math.round(
-        Math.random() * 1000
-      )}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`
-    ).then((res) =>
-      res.json().then((data) => {
-        if (data) {
-          data.forEach((pic) => {
-            imgs += `
-            <img src=${pic.urls.small} alt="image"/>
-            `;
-            galleryEl.style.display = "block";
-            galleryEl.innerHTML = imgs;
-            btnEl.style.display = "block";
-            errorMessageEl.style.display = "none";
-          });
+      if (!query) {
+        errorMessageEl.innerText = "Please enter a search keyword.";
+        return;
+      }
+
+      if (count < 1 || count > 10) {
+        errorMessageEl.innerText = "Please enter a number between 1 and 10.";
+        return;
+      }
+
+      galleryEl.innerHTML = `<div class="spinner"></div>`;
+
+      try {
+        const res = await fetch(
+          `https://api.unsplash.com/search/photos?query=${query}&per_page=${count}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`
+        );
+
+        const data = await res.json();
+
+        if (!data || !data.results || data.results.length === 0) {
+          throw new Error("No results");
         }
-      })
-    );
-  } catch (error) {
-    console.log(error);
-    errorMessageEl.style.display = "block";
-    errorMessageEl.innerHTML = "An error happened, try again later";
-    btnEl.style.display = "block";
-    galleryEl.style.display = "none";
-  }
-}
 
-btnEl.addEventListener("click", fetchImage);</script>
-  </body>
+        galleryEl.innerHTML = data.results
+          .map(
+            (photo) =>
+              `<img src="${photo.urls.small}" alt="${query}" title="${photo.alt_description || query}" />`
+          )
+          .join("");
+
+        setTimeout(() => {
+          galleryEl.style.opacity = 1;
+        }, 100);
+      } catch (error) {
+        galleryEl.innerHTML = "";
+        errorMessageEl.innerText = "No images found. Try a different keyword.";
+        console.error(error);
+      }
+    }
+
+    // Button click
+    btnEl.addEventListener("click", fetchImages);
+
+    // Press Enter to search
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") fetchImages();
+    });
+  </script>
+</body>
 </html>
